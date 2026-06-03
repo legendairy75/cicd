@@ -2,6 +2,7 @@ name: Setup Node.js environment
 
 on:
             pull_request: 
+            push:
             
 jobs:
   test:
@@ -13,3 +14,12 @@ jobs:
               with:
                 node-version: 24
             - run: npm install
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
