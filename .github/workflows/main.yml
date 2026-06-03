@@ -31,5 +31,4 @@ jobs:
        password: ${{ secrets.GITHUB_TOKEN }}
     - name: Push
       run: |
-       docker tag myapp ghcr.io/legendairy75/cicd:latest
        docker push ghcr.io/legendairy75/cicd:latest
