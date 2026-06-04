@@ -36,3 +36,25 @@ jobs:
     - name: Push
       run: |
        docker push ghcr.io/legendairy75/cicd:latest
+  
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.HOST }}
+        username: ubuntu
+        key: ${{ secrets.SSH_KEY }}
+
+        script: |
+          docker pull ghcr.io/user/myapp:latest
+          docker stop myapp || true
+          docker rm myapp || true
+          docker run -d \
+            --name myapp \
+            -p 80:3000 \
+            ghcr.io/user/myapp:latest
+    
