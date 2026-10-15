@@ -3,6 +3,7 @@ name: Setup Node.js environment
 on:
             pull_request:
             push:
+            workflow_dispatch:
 
 jobs:
   test:
